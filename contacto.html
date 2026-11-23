@@ -8,28 +8,24 @@
 <style>
 @font-face{font-family:"Bricolage Grotesque";src:url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
 @font-face{font-family:"Hanken Grotesk";src:url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-:root{--ink:#0b1220;--card:#111a2e;--line:#1e293b;--gold:#c69d53;--gold-lt:#d8b373;--paper:#fff;--mute:#aab6cb;--dim:#7d8aa5;
-  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color-scheme:dark}
+:root{--ink:#0b1220;--card:#111a2e;--line:#1e293b;--gold:#c69d53;--gold-lt:#d8b373;--paper:#fff;--mute:#aab6cb;--dim:#7d8aa5;--head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;color-scheme:dark}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--body);background:var(--ink);color:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{color:var(--gold);text-decoration:none}
 a:hover{text-decoration:underline;text-underline-offset:3px}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:6px}
-
 .top{border-bottom:1px solid rgba(255,255,255,.08)}
 .top-in{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
 .brand{display:block;line-height:0}
 .brand img{display:block;height:40px;width:auto}
 .back{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:700}
-
 main{max-width:1100px;margin:0 auto;padding:56px 24px 96px}
 h1{font-family:var(--head);font-size:clamp(2rem,5vw,3rem);line-height:1.08;letter-spacing:-.03em;font-weight:800;margin-bottom:14px}
 .lead{color:var(--mute);font-size:1.1rem;max-width:56ch;margin-bottom:40px}
 .grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,.65fr);gap:32px;align-items:start}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:32px}
 .card h2{font-family:var(--head);font-size:1.4rem;letter-spacing:-.02em;margin-bottom:18px}
-
 .field{margin-bottom:20px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:0 20px}
 label{display:block;font-weight:600;margin-bottom:8px;font-size:.95rem}
@@ -56,14 +52,12 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 .status .acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 .mini{display:inline-flex;align-items:center;min-height:44px;padding:9px 18px;border-radius:999px;border:1px solid rgba(255,255,255,.28);background:transparent;color:#fff;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer}
 .mini:hover{border-color:var(--gold);color:var(--gold);text-decoration:none}
-
 .done{text-align:left}
 .done .tick{width:56px;height:56px;border-radius:50%;background:rgba(37,211,102,.15);color:#25d366;display:grid;place-items:center;margin-bottom:18px}
 .done .tick svg{width:28px;height:28px}
 .done h2{margin-bottom:10px}
 .done p{color:var(--mute)}
 .done h2:focus{outline:none}
-
 .side p{color:var(--mute);font-size:.98rem;margin-bottom:18px}
 .wa{display:flex;align-items:center;justify-content:center;gap:12px;min-height:52px;padding:14px 20px;border-radius:999px;background:#25d366;color:#0b1220;font-weight:700;margin-bottom:26px}
 .wa:hover{background:#3be07b;text-decoration:none}
@@ -72,23 +66,12 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 .way strong{display:block;font-size:.85rem;color:var(--dim);font-weight:600;margin-bottom:6px}
 .way .val{display:block;color:#e2e8f0;font-weight:600;overflow-wrap:anywhere}
 .way .acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-
-@media (max-width:860px){
-  main{padding:40px 20px 72px}
-  .grid{grid-template-columns:1fr}
-  .top-in{padding:10px 20px}
-}
-@media (max-width:560px){
-  .row2{grid-template-columns:1fr}
-  .card{padding:22px 18px}
-  .btn{width:100%}
-  .lead{margin-bottom:28px}
-}
+@media (max-width:860px){main{padding:40px 20px 72px}.grid{grid-template-columns:1fr}.top-in{padding:10px 20px}}
+@media (max-width:560px){.row2{grid-template-columns:1fr}.card{padding:22px 18px}.btn{width:100%}.lead{margin-bottom:28px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
-
 <header class="top">
   <div class="top-in">
     <a class="brand" href="index.html" aria-label="FER13 Global Labs, volver al inicio"><img src="logo-fer13.jpg" alt="FER13 Global Labs" width="638" height="266"></a>
@@ -99,20 +82,15 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 <main>
   <h1>Cuéntanos tu proyecto</h1>
   <p class="lead">Escribe aquí tu consulta y te responderemos por correo electrónico. Cuanto más claro nos lo cuentes, mejor podremos orientarte.</p>
-
   <div class="grid">
-
     <section class="card" aria-labelledby="formTitle">
-
       <noscript>
         <div class="status info" style="margin-bottom:20px">
           <p>Este formulario necesita JavaScript para funcionar. Mientras tanto, puedes escribirnos directamente a <a href="mailto:fer13globallabs@gmail.com">fer13globallabs@gmail.com</a>.</p>
         </div>
       </noscript>
-
       <div id="formWrap">
         <h2 id="formTitle">Envíanos un mensaje</h2>
-
         <form id="contactForm" novalidate>
           <div class="row2">
             <div class="field" data-field="name">
@@ -126,7 +104,6 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
               <p class="err" id="err-email"></p>
             </div>
           </div>
-
           <div class="row2">
             <div class="field" data-field="phone">
               <label for="phone">Teléfono o WhatsApp <span class="opt">(opcional)</span></label>
@@ -144,16 +121,15 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
               </select>
             </div>
           </div>
-
           <div class="field" data-field="message">
             <label for="message">Mensaje</label>
             <textarea id="message" name="message" maxlength="2000" required aria-describedby="err-message"></textarea>
             <p class="err" id="err-message"></p>
           </div>
-
           <!-- Campo trampa contra robots -->
-          <div class="hp" aria-hidden="true"><label>No marcar <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off"></label></div>
-
+          <div class="hp" aria-hidden="true">
+            <label>No rellenar <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </div>
           <div class="field" data-field="consent">
             <div class="check">
               <input id="consent" name="consent" type="checkbox" required aria-describedby="err-consent">
@@ -161,14 +137,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
             </div>
             <p class="err" id="err-consent"></p>
           </div>
-
           <button class="btn" id="sendBtn" type="submit">Enviar mensaje</button>
           <p class="small">Usamos tus datos solo para responderte. No hay cookies ni publicidad.</p>
-
           <div class="status" id="status" role="status" aria-live="polite" hidden></div>
         </form>
       </div>
-
       <div class="done" id="done" hidden>
         <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></div>
         <h2 id="doneTitle" tabindex="-1">Mensaje enviado</h2>
@@ -179,13 +152,10 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
     <aside class="card side" aria-labelledby="sideTitle">
       <h2 id="sideTitle">Otras formas de contacto</h2>
       <p>Si prefieres algo más directo, también puedes escribirnos por aquí.</p>
-
-      <!-- WhatsApp: número en formato internacional sin + ni espacios -->
       <a class="wa" href="https://wa.me/34654129024?text=Hola%20FER13%20Global%20Labs" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         Escribir por WhatsApp
       </a>
-
       <div class="way">
         <strong>Correo electrónico</strong>
         <a class="val" href="mailto:fer13globallabs@gmail.com?subject=Consulta%20desde%20la%20web">fer13globallabs@gmail.com</a>
@@ -194,13 +164,11 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
           <a class="mini" href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=fer13globallabs%40gmail.com&amp;su=Consulta%20desde%20la%20web" target="_blank" rel="noopener">Abrir en Gmail</a>
         </div>
       </div>
-
       <div class="way">
         <strong>LinkedIn</strong>
         <a class="val" href="https://www.linkedin.com/in/fernando-valero-34345442b/" target="_blank" rel="noopener">Fernando Valero</a>
       </div>
     </aside>
-
   </div>
 </main>
 
@@ -208,90 +176,106 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
 (function(){
   'use strict';
 
-  /* ============================================================
-     CONFIGURACIÓN DEL FORMULARIO
-     ------------------------------------------------------------
-     1) Regístrate gratis en https://web3forms.com con tu correo
-        fer13globallabs@gmail.com
-     2) Copia la Access Key que te dan
-     3) Pégala abajo entre las comillas, sustituyendo el texto
-        PEGA_AQUI_TU_ACCESS_KEY
-     Mientras no la pegues, el formulario NO envía correos reales:
-     solo muestra un aviso al visitante.
-     ============================================================ */
-  var ACCESS_KEY = 'PEGA_AQUI_TU_ACCESS_KEY';
-  var ENDPOINT   = 'https://api.web3forms.com/submit';
-  var MAIL       = 'fer13globallabs@gmail.com';
+  // Formspree: los mensajes se envían al formulario asociado a este endpoint.
+  var ENDPOINT = 'https://formspree.io/f/xgakppzp';
+  var MAIL = 'fer13globallabs@gmail.com';
 
-  var form   = document.getElementById('contactForm');
-  var btn    = document.getElementById('sendBtn');
+  var form = document.getElementById('contactForm');
+  var btn = document.getElementById('sendBtn');
   var status = document.getElementById('status');
-  var wrap   = document.getElementById('formWrap');
-  var done   = document.getElementById('done');
-
-  /* Aviso en consola si el desarrollador olvidó configurar la clave */
-  if (ACCESS_KEY.indexOf('PEGA_AQUI') === 0) {
-    console.warn('[FER13] Formulario no configurado: falta ACCESS_KEY de Web3Forms. El formulario NO enviará correos hasta que la configures en contacto.html.');
-  }
+  var wrap = document.getElementById('formWrap');
+  var done = document.getElementById('done');
 
   function get(n){ return form.elements[n]; }
   function fieldBox(n){ return form.querySelector('[data-field="'+n+'"]'); }
 
-  /* Validación */
+  // Validación del formulario
   var rules = {
-    name:    function(v){ return v.length >= 2 || 'Escribe tu nombre.'; },
-    email:   function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) || 'Escribe un correo válido, por ejemplo nombre@dominio.com.'; },
+    name: function(v){ return v.length >= 2 || 'Escribe tu nombre.'; },
+    email: function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v) || 'Escribe un correo válido, por ejemplo nombre@dominio.com.'; },
     message: function(v){ return v.length >= 10 || 'Cuéntanos un poco más (mínimo 10 caracteres).'; },
     consent: function(v, el){ return el.checked || 'Marca la casilla para poder enviar tu mensaje.'; }
   };
+
   function setError(n, msg){
     var box = fieldBox(n), el = get(n), p = document.getElementById('err-'+n);
     box.classList.toggle('invalid', !!msg);
     el.setAttribute('aria-invalid', msg ? 'true' : 'false');
     if (p) p.textContent = msg || '';
   }
+
   function validate(){
     var first = null;
     Object.keys(rules).forEach(function(n){
       var el = get(n), v = (el.value || '').trim();
       var r = rules[n](v, el);
-      if (r !== true){ setError(n, r); if (!first) first = el; } else setError(n, '');
+      if (r !== true){ setError(n, r); if (!first) first = el; }
+      else setError(n, '');
     });
     if (first) first.focus();
     return !first;
   }
+
   Object.keys(rules).forEach(function(n){
     var el = get(n);
-    el.addEventListener(n === 'consent' ? 'change' : 'input', function(){ if (fieldBox(n).classList.contains('invalid')) setError(n, ''); });
+    el.addEventListener(n === 'consent' ? 'change' : 'input', function(){
+      if (fieldBox(n).classList.contains('invalid')) setError(n, '');
+    });
   });
 
   function data(){
-    return { name: get('name').value.trim(), email: get('email').value.trim(), phone: get('phone').value.trim(),
-             service: get('service').value, message: get('message').value.trim() };
+    return {
+      name: get('name').value.trim(),
+      email: get('email').value.trim(),
+      phone: get('phone').value.trim(),
+      service: get('service').value,
+      message: get('message').value.trim()
+    };
   }
+
   function mailtoUrl(d){
     var subject = 'Consulta desde la web' + (d.service ? ' - ' + d.service : '');
     var lines = ['Hola, soy ' + d.name + '.', '', d.message, '', '---', 'Correo: ' + d.email];
     if (d.phone) lines.push('Teléfono: ' + d.phone);
     return 'mailto:' + MAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(lines.join('\n'));
   }
-  function setBusy(b){ btn.disabled = b; btn.textContent = b ? 'Enviando…' : 'Enviar mensaje'; }
-  function showStatus(kind, html, d){
+
+  function setBusy(b){
+    btn.disabled = b;
+    btn.textContent = b ? 'Enviando…' : 'Enviar mensaje';
+  }
+
+  function showStatus(kind, message, d){
     status.className = 'status ' + kind;
     status.innerHTML = '';
-    var p = document.createElement('p'); p.textContent = html; status.appendChild(p);
+    var p = document.createElement('p');
+    p.textContent = message;
+    status.appendChild(p);
+
     if (d){
-      var acts = document.createElement('div'); acts.className = 'acts';
-      var m = document.createElement('a'); m.className = 'mini'; m.href = mailtoUrl(d); m.textContent = 'Escribir desde mi correo';
-      var g = document.createElement('a'); g.className = 'mini'; g.target = '_blank'; g.rel = 'noopener'; g.textContent = 'Abrir en Gmail';
+      var acts = document.createElement('div');
+      acts.className = 'acts';
+      var m = document.createElement('a');
+      m.className = 'mini';
+      m.href = mailtoUrl(d);
+      m.textContent = 'Escribir desde mi correo';
+      var g = document.createElement('a');
+      g.className = 'mini';
+      g.target = '_blank';
+      g.rel = 'noopener';
+      g.textContent = 'Abrir en Gmail';
       g.href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(MAIL) + '&su=' + encodeURIComponent('Consulta desde la web') + '&body=' + encodeURIComponent(d.message);
-      acts.appendChild(m); acts.appendChild(g); status.appendChild(acts);
+      acts.appendChild(m);
+      acts.appendChild(g);
+      status.appendChild(acts);
     }
     status.hidden = false;
   }
+
   function showDone(name){
     document.getElementById('doneText').textContent = 'Gracias, ' + name + '. Te responderemos al correo que has indicado.';
-    wrap.hidden = true; done.hidden = false;
+    wrap.hidden = true;
+    done.hidden = false;
     document.getElementById('doneTitle').focus();
   }
 
@@ -300,60 +284,71 @@ input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px soli
     status.hidden = true;
     if (!validate()) return;
 
-    /* Trampa anti-robots: si está marcada, fingimos éxito sin enviar nada */
-    if (get('botcheck').checked){ showDone(get('name').value.trim() || ''); return; }
-
-    var d = data();
-
-    /* Si aún no se ha configurado la clave, avisamos al visitante */
-    if (ACCESS_KEY.indexOf('PEGA_AQUI') === 0){
-      showStatus('bad', 'Este formulario aún no está activo. Escríbenos directamente a ' + MAIL + ' mientras lo terminamos de configurar. Sentimos las molestias.', d);
+    // Si un robot rellena el campo trampa, no se envía nada.
+    if (get('_gotcha').value.trim() !== ''){
+      showDone(get('name').value.trim() || '');
       return;
     }
 
+    var d = data();
     setBusy(true);
+
     var ctrl = ('AbortController' in window) ? new AbortController() : null;
     var timer = ctrl ? setTimeout(function(){ ctrl.abort(); }, 15000) : null;
+    var payload = new FormData(form);
+    payload.append('_subject', 'Nuevo mensaje desde la web de FER13 Global Labs');
+    payload.append('_replyto', d.email);
 
     fetch(ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        access_key: ACCESS_KEY,
-        subject: 'Nuevo mensaje desde la web de FER13 Global Labs',
-        from_name: 'Web FER13 Global Labs',
-        name: d.name, email: d.email,
-        phone: d.phone || '(no indicado)',
-        service: d.service || '(sin especificar)',
-        message: d.message,
-        botcheck: ''
-      }),
+      headers: { 'Accept': 'application/json' },
+      body: payload,
       signal: ctrl ? ctrl.signal : undefined
     })
-    .then(function(res){ return res.json().then(function(j){ return { ok: res.ok && j && j.success, j: j }; }); })
-    .then(function(r){
-      if (r.ok){ showDone(d.name); }
-      else { showStatus('bad', 'No hemos podido enviar tu mensaje. No se ha perdido nada: puedes enviarlo desde tu correo con este botón.', d); }
+    .then(function(res){
+      return res.json().catch(function(){ return {}; }).then(function(j){
+        return { ok: res.ok && j && j.ok !== false, data: j };
+      });
+    })
+    .then(function(result){
+      if (result.ok){
+        showDone(d.name);
+      } else {
+        showStatus('bad', 'No hemos podido enviar tu mensaje. No se ha perdido nada: puedes enviarlo desde tu correo con este botón.', d);
+      }
     })
     .catch(function(){
       showStatus('bad', 'No hemos podido enviar tu mensaje, probablemente por la conexión. Puedes enviarlo desde tu correo con estos botones.', d);
     })
-    .then(function(){ if (timer) clearTimeout(timer); setBusy(false); });
+    .then(function(){
+      if (timer) clearTimeout(timer);
+      setBusy(false);
+    });
   });
 
-  /* Botón copiar correo */
+  // Botón para copiar el correo electrónico
   document.querySelectorAll('[data-copy]').forEach(function(b){
     var original = b.textContent;
     b.addEventListener('click', function(){
       var text = b.getAttribute('data-copy');
-      function ok(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = original; }, 2000); }
+      function ok(){
+        b.textContent = 'Copiado';
+        setTimeout(function(){ b.textContent = original; }, 2000);
+      }
       function legacy(){
-        var t = document.createElement('textarea'); t.value = text; t.setAttribute('readonly',''); t.style.position = 'fixed'; t.style.opacity = '0';
-        document.body.appendChild(t); t.select();
-        try { document.execCommand('copy'); ok(); } catch(e){ b.textContent = text; }
+        var t = document.createElement('textarea');
+        t.value = text;
+        t.setAttribute('readonly','');
+        t.style.position = 'fixed';
+        t.style.opacity = '0';
+        document.body.appendChild(t);
+        t.select();
+        try { document.execCommand('copy'); ok(); }
+        catch(e){ b.textContent = text; }
         t.remove();
       }
-      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, legacy); else legacy();
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(ok, legacy);
+      else legacy();
     });
   });
 })();
