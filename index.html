@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FER13 Global Labs | Ingeniería de Software y Diseño Web</title>
+<meta name="description" content="Webs que dan visibilidad y hacen crecer tu marca, software a medida y automatización para empresas y marcas personales en todo el mundo.">
+<style>
+@font-face{font-family:"Bricolage Grotesque";src:url("fonts/bricolage-grotesque-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Hanken Grotesk";src:url("fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+
+:root{
+  --ink:#0b1220; --slate:#0f172a; --card-dark:#111a2e; --gold:#c69d53; --gold-dk:#8f6a0a;
+  --paper:#ffffff; --mist:#f1f5f9; --line:#e2e8f0; --mute:#475569;
+  --head:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Hanken Grotesk","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;
+  --mono:Consolas,"Cascadia Code",Menlo,monospace;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--body);color:var(--slate);background:var(--paper);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 28px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--head);text-wrap:balance}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:15px 30px;border-radius:999px;font-weight:700;font-size:1rem;border:2px solid var(--gold);background:var(--gold);color:var(--ink);transition:background .2s,color .2s,border-color .2s}
+.btn:hover{background:#d8b373;border-color:#d8b373}
+.btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:#fff}
+.btn-sm{padding:10px 22px;font-size:.92rem}
+
+nav{position:fixed;inset:0 0 auto 0;z-index:100;background:rgba(11,18,32,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.nav-logo img{height:44px;width:auto;border-radius:8px}
+.nav-right{display:flex;align-items:center;gap:36px}
+.nav-links{display:flex;gap:30px}
+.nav-links a{font-size:.95rem;font-weight:600;color:#cbd5e1;transition:color .2s}
+.nav-links a:hover{color:var(--gold)}
+
+.hero{position:relative;background:var(--ink);color:#fff;overflow:hidden;display:flex;flex-direction:column;min-height:min(100svh,900px)}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 70% at 78% 40%,rgba(198,157,83,.14),transparent 70%);pointer-events:none}
+#net{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hero-main{position:relative;z-index:1;flex:1;display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center;padding-top:150px;padding-bottom:90px}
+.hero-main{width:100%}
+.hero-text{container-type:inline-size}
+.hero h1{font-size:clamp(1.9rem,5.4vw,4.4rem);font-size:clamp(1.9rem,11.6cqi,5rem);line-height:1.02;letter-spacing:-.04em;font-weight:800;margin-bottom:28px}
+.hero h1 .line{display:block;white-space:nowrap}
+.hero h1 .gold{color:var(--gold)}
+.hero-text p{font-size:1.15rem;color:#aab6cb;max-width:50ch;margin-bottom:38px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+
+.code{background:rgba(15,23,42,.86);border:1px solid rgba(255,255,255,.1);border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45);backdrop-filter:blur(6px)}
+.code-bar{display:flex;gap:8px;padding:14px 18px;background:rgba(255,255,255,.05)}
+.dot{width:12px;height:12px;border-radius:50%}
+.dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
+.code-body{padding:24px 24px 28px;font-family:var(--mono);font-size:.95rem;line-height:1.85;color:#d4d4d4;min-height:15.5em}
+.cl{display:block;white-space:pre;overflow:hidden;width:0;animation:type .8s steps(var(--n),end) forwards;animation-delay:calc(.7s + var(--i)*.85s)}
+.cl.gap{margin-top:1em}
+@keyframes type{to{width:calc(var(--n)*1ch + 1ch)}}
+.k{color:#7fb0ff}.f{color:#ffd479}.s{color:#9fe3b0}.c{color:#6a9955}
+.cursor{display:inline-block;width:.6ch;height:1.1em;background:var(--gold);vertical-align:-.2em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+.marquee{position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.1);overflow:hidden;background:rgba(11,18,32,.6)}
+.track{display:flex;width:max-content;animation:scroll 40s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.group{display:flex;flex-shrink:0}
+.group span{display:flex;align-items:center;gap:36px;padding:22px 0 22px 36px;font-weight:600;color:#cbd5e1;white-space:nowrap}
+.group span::after{content:"";width:7px;height:7px;background:var(--gold);transform:rotate(45deg)}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+.sec{padding:112px 0}
+.head{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:end;margin-bottom:56px}
+.head h2{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.035em;font-weight:800}
+.head p{font-size:1.1rem;color:var(--mute);max-width:46ch}
+.dark{background:var(--slate);color:#fff}
+.dark .head p{color:#94a3b8}
+
+.rows{border-top:2px solid var(--slate)}
+.row{display:grid;grid-template-columns:64px 1fr 1.2fr;gap:40px;align-items:start;padding:40px 24px 40px 16px;border-bottom:1px solid var(--line);transition:background .25s,box-shadow .25s}
+.row:hover{background:var(--mist);box-shadow:inset 4px 0 0 var(--gold)}
+.row-icon{width:56px;height:56px;border-radius:12px;background:var(--slate);color:var(--gold);display:grid;place-items:center}
+.row-icon svg{width:26px;height:26px}
+.row h3{font-size:1.6rem;line-height:1.15;letter-spacing:-.025em;font-weight:700}
+.row p{color:var(--mute);font-size:1.05rem;max-width:52ch}
+
+.projects{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.proj{background:var(--card-dark);border:1px solid #1e293b;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .25s}
+.proj:hover{border-color:var(--gold)}
+.tile{position:relative;aspect-ratio:3/2;display:flex;align-items:flex-end;padding:24px;overflow:hidden}
+.tile b{position:relative;font-family:var(--head);font-size:1.7rem;line-height:1.08;letter-spacing:-.025em;font-weight:800;color:#fff}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.t1{background:radial-gradient(circle,rgba(198,157,83,.5) 0 2px,transparent 3px) 0 0/26px 26px,linear-gradient(140deg,#0e3a44,#0f172a)}
+.t2{background:repeating-linear-gradient(90deg,rgba(198,157,83,.22) 0 3px,transparent 3px 24px),linear-gradient(140deg,#1b2a4a,#0b1220)}
+.t3{background:repeating-linear-gradient(45deg,rgba(255,255,255,.07) 0 1px,transparent 1px 16px),linear-gradient(140deg,#5c4310,#0f172a)}
+.info{padding:28px 26px 30px;display:flex;flex-direction:column;flex:1}
+.info p{color:#94a3b8;font-size:.98rem;margin-bottom:20px;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.tag{border:1px solid #26344f;color:#cbd5e1;padding:3px 12px;border-radius:6px;font-size:.78rem;font-weight:600}
+.link{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-weight:700;background:linear-gradient(currentColor,currentColor) 0 100%/0 2px no-repeat;padding-bottom:3px;transition:background-size .25s}
+.link:hover{background-size:100% 2px}
+.link svg{width:15px;height:15px}
+
+.founder{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
+.photo{position:relative;width:fit-content;max-width:100%}
+.photo::before{content:"";position:absolute;inset:20px -20px -20px 20px;border:2px solid var(--gold);border-radius:16px}
+.photo img{position:relative;display:block;width:auto;max-width:min(100%,380px);max-height:480px;border-radius:16px;background:var(--mist)}
+.founder h2{font-size:clamp(2rem,4.2vw,3.4rem);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin-bottom:28px}
+.founder p{color:var(--mute);font-size:1.08rem;max-width:56ch;margin-bottom:18px}
+.quote{margin-top:34px;padding-left:24px;border-left:4px solid var(--gold);font-family:var(--head);font-size:1.5rem;line-height:1.3;font-weight:600;letter-spacing:-.015em;max-width:30ch}
+
+footer{position:relative;background:var(--ink);color:#fff;padding:120px 0 36px;overflow:hidden;--mx:70%;--my:30%}
+footer::before{content:"";position:absolute;inset:-48px 0 0 0;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:48px 48px;animation:grid 6s linear infinite;-webkit-mask-image:radial-gradient(70% 90% at 50% 40%,#000,transparent);mask-image:radial-gradient(70% 90% at 50% 40%,#000,transparent)}
+footer::after{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx) var(--my),rgba(198,157,83,.2),transparent 70%);pointer-events:none}
+@keyframes grid{to{transform:translateY(48px)}}
+footer .container{position:relative;z-index:1}
+.cta{display:grid;grid-template-columns:1.4fr auto;gap:48px;align-items:center}
+.cta h2{font-size:clamp(2.2rem,5vw,4.2rem);line-height:1.03;letter-spacing:-.04em;font-weight:800;margin-bottom:18px}
+.cta p{color:#aab6cb;font-size:1.15rem;max-width:44ch}
+.wa{display:inline-flex;align-items:center;gap:12px;padding:18px 34px;border-radius:999px;background:#25d366;color:#05301a;font-weight:800;font-size:1.08rem;transition:background .2s,transform .2s;white-space:nowrap}
+.wa:hover{background:#2fe574;transform:translateY(-2px)}
+.contact{display:flex;flex-wrap:wrap;gap:16px 44px;margin-top:72px}
+.contact a{display:inline-flex;align-items:center;gap:12px;color:#cbd5e1;font-weight:600;transition:color .2s}
+.contact a:hover{color:var(--gold)}
+.contact svg{width:22px;height:22px;flex-shrink:0;color:var(--gold)}
+.copy{margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.12);color:#7d8aa5;font-size:.9rem}
+
+@media (max-width:980px){
+  .hero-main{grid-template-columns:1fr;gap:48px;padding-top:128px;padding-bottom:64px}
+  .head,.founder,.cta{grid-template-columns:1fr;gap:28px}
+  .projects{grid-template-columns:1fr}
+  .row{grid-template-columns:56px 1fr;gap:20px 24px}
+  .row p{grid-column:2}
+  .sec{padding:76px 0}
+  .founder{gap:56px}
+  .photo{margin-right:20px}
+}
+@media (max-width:700px){
+  .nav-links{display:none}
+  .code{display:none}
+  .hero-actions .btn{width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cl{width:auto;animation:none}
+  .cursor,.track,footer::before{animation:none}
+  *{transition:none!important}
+}
+
+.chat-fab{position:fixed;right:24px;bottom:24px;z-index:120;width:62px;height:62px;border-radius:50%;border:0;background:var(--gold);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.chat-fab:hover{background:#d8b373;transform:scale(1.05)}
+.chat-fab svg{width:28px;height:28px;grid-area:1/1;transition:opacity .2s,transform .2s}
+.chat-fab .i-close{opacity:0;transform:rotate(-90deg)}
+.chat-fab[aria-expanded="true"] .i-chat{opacity:0;transform:rotate(90deg)}
+.chat-fab[aria-expanded="true"] .i-close{opacity:1;transform:none}
+.chat-hint{position:fixed;right:24px;bottom:98px;z-index:120;max-width:240px;background:#fff;color:var(--slate);padding:12px 16px;border-radius:14px 14px 4px 14px;font-size:.92rem;font-weight:600;box-shadow:0 12px 32px rgba(0,0,0,.28);animation:hint .35s ease-out}
+.chat-hint[hidden]{display:none}
+@keyframes hint{from{opacity:0;transform:translateY(8px)}}
+.chat{position:fixed;right:24px;bottom:100px;z-index:120;width:380px;height:min(580px,calc(100svh - 130px));display:flex;flex-direction:column;background:#fff;color:var(--slate);border-radius:18px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.4);animation:pop .2s ease-out}
+.chat[hidden]{display:none}
+@keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}}
+.chat-head{display:flex;align-items:center;gap:12px;padding:16px 18px;background:var(--slate);color:#fff}
+.chat-av{width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--ink);display:grid;place-items:center;font-family:var(--head);font-weight:800;font-size:1.1rem;flex-shrink:0}
+.chat-head div:nth-child(2){flex:1;line-height:1.3}
+.chat-head strong{display:block;font-size:1rem}
+.chat-head span{font-size:.8rem;color:#94a3b8}
+.chat-x{background:none;border:0;color:#cbd5e1;font-size:1.7rem;line-height:1;cursor:pointer;padding:4px 8px;border-radius:8px}
+.chat-x:hover{color:#fff;background:rgba(255,255,255,.1)}
+.chat-log{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:10px;background:#fff}
+.msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:.96rem;line-height:1.45;overflow-wrap:anywhere}
+.msg.bot{align-self:flex-start;background:var(--mist);border-bottom-left-radius:4px}
+.msg.me{align-self:flex-end;background:var(--gold);color:var(--ink);font-weight:500;border-bottom-right-radius:4px}
+.msg.typing{display:flex;gap:5px;padding:14px 16px}
+.msg.typing i{width:7px;height:7px;border-radius:50%;background:#94a3b8;animation:dot 1s infinite}
+.msg.typing i:nth-child(2){animation-delay:.15s}
+.msg.typing i:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+.chat-chips{display:flex;flex-wrap:wrap;gap:8px;padding:0 18px 12px;background:#fff}
+.chat-chips:empty{display:none}
+.chip{font:inherit;font-size:.9rem;font-weight:600;padding:8px 14px;border-radius:999px;border:1.5px solid var(--gold);background:#fff;color:var(--slate);cursor:pointer;transition:background .2s}
+.chip:hover{background:#f6eedc}
+.chip-main{background:var(--gold);color:var(--ink)}
+.chip-main:hover{background:#d8b373}
+.chat-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:#fff}
+.chat-form input{flex:1;font:inherit;font-size:.96rem;padding:11px 16px;border:1.5px solid var(--line);border-radius:999px;outline:none;color:var(--slate)}
+.chat-form input:focus{border-color:var(--gold)}
+.chat-form button{width:44px;height:44px;border:0;border-radius:50%;background:var(--slate);color:var(--gold);cursor:pointer;display:grid;place-items:center;flex-shrink:0}
+.chat-form button:hover{background:#1e293b}
+.chat-form button svg{width:20px;height:20px}
+.chat-human{display:block;text-align:center;padding:10px 14px 14px;font-size:.84rem;color:var(--mute);background:#fff}
+.chat-human b{color:var(--gold-dk);text-decoration:underline;text-underline-offset:3px}
+@media (max-width:520px){
+  .chat{right:12px;left:12px;width:auto;bottom:92px}
+  .chat-fab{right:16px;bottom:16px}
+  .chat-hint{right:16px;bottom:90px}
+}
+
+.soft{background:var(--mist)}
+.feature + .feature{margin-top:112px}
+.feature-head{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:start;margin-bottom:40px}
+.feature h3{font-size:clamp(1.7rem,3vw,2.4rem);line-height:1.1;letter-spacing:-.03em;font-weight:800;margin-bottom:14px}
+.feature p{color:var(--mute);font-size:1.08rem;max-width:52ch}
+.ticks{list-style:none;border-top:2px solid var(--slate)}
+.ticks li{display:flex;gap:14px;align-items:baseline;padding:14px 4px;border-bottom:1px solid var(--line);font-weight:600}
+.ticks li::before{content:"";flex-shrink:0;width:8px;height:8px;background:var(--gold);transform:rotate(45deg) translateY(-1px)}
+.ticks small{display:block;font-weight:400;color:var(--mute);font-size:.95rem}
+.win{background:var(--ink);border:1px solid #1e293b;border-radius:14px;overflow:hidden;box-shadow:0 30px 70px rgba(15,23,42,.22)}
+.win-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;background:#162033}
+.win-bar b{margin-left:10px;font-size:.82rem;font-weight:600;color:#94a3b8}
+.win img{display:block;width:100%;height:auto}
+.feature-split{display:grid;grid-template-columns:1fr .9fr;gap:64px;align-items:center}
+.feature-split .btn{margin-top:28px}
+.feature-split .ticks{margin-top:28px}
+.feature .note{margin-top:22px;font-size:.88rem;color:var(--mute)}
+@media (max-width:980px){
+  .feature-head,.feature-split{grid-template-columns:1fr;gap:32px}
+  .feature + .feature{margin-top:80px}
+}
+
+.photo img{height:auto}
+.shot img{width:100%;height:auto;min-width:var(--min,0)}
+.shot-hint{display:none;padding:9px 16px;background:#162033;color:#94a3b8;font-size:.8rem;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+.chat-form input{font-size:16px}
+.chip{padding:10px 16px}
+.contact a{min-height:44px;overflow-wrap:anywhere}
+.copy a{display:inline-block;padding:10px 0}
+.nav-toggle{display:none;flex-direction:column;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:10px;background:transparent;color:#e2e8f0;cursor:pointer;flex-shrink:0}
+.nav-toggle:hover{background:rgba(255,255,255,.08)}
+.nav-toggle span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .2s}
+.nav-toggle span+span{margin-top:6px}
+nav.open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+nav.open .nav-toggle span:nth-child(2){opacity:0}
+nav.open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@supports (height:100dvh){ .chat{height:min(580px,calc(100dvh - 130px))} }
+
+@media (hover:none){
+  .row:hover{background:none;box-shadow:none}
+  .proj:hover{border-color:#1e293b}
+  .btn:hover{background:var(--gold);border-color:var(--gold)}
+  .btn-ghost:hover{background:transparent;border-color:rgba(255,255,255,.35)}
+  .wa:hover{background:#25d366;transform:none}
+  .chat-fab:hover{transform:none}
+}
+
+@media (max-width:980px){
+  .nav-right{gap:22px}
+  .nav-links{gap:20px}
+  .nav-links a{font-size:.9rem}
+  .btn-sm{min-height:44px}
+  .hero h1{font-size:clamp(1.9rem,11.6cqi,4.2rem)}
+  .code{max-width:560px}
+  .link{position:relative}
+  .link::before{content:"";position:absolute;inset:-12px -8px}
+  .photo{width:min(100%,340px)}
+  .photo img{width:100%;max-width:none;max-height:none;aspect-ratio:4/5;object-fit:cover;object-position:50% 0}
+  footer{padding-bottom:96px}
+  .shot{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .shot-crm{--min:960px}
+  .hint-crm{display:block}
+}
+
+@media (min-width:701px) and (max-width:980px){
+  .proj{display:grid;grid-template-columns:minmax(220px,2fr) 3fr}
+  .proj .tile{aspect-ratio:auto;min-height:100%}
+}
+
+@media (max-width:700px){
+  .nav-inner{gap:10px}
+  .nav-right{gap:10px}
+  .btn-sm{padding:10px 18px}
+  .nav-toggle{display:flex}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;padding:6px 20px 18px;background:rgba(11,18,32,.99);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,.08)}
+  nav.open .nav-links{display:flex}
+  .nav-links a{padding:15px 4px;font-size:1.05rem;border-top:1px solid rgba(255,255,255,.08)}
+  .nav-links a:first-child{border-top:0}
+  .shot-crm{--min:860px}
+  .shot-eti{--min:600px}
+  .hint-eti{display:block}
+}
+
+@media (max-width:520px){
+  .container{padding:0 20px}
+  .nav-logo img{height:38px}
+  .hero-main{padding-top:108px;padding-bottom:48px;gap:36px}
+  .hero-text p{font-size:1.05rem;margin-bottom:30px}
+  .sec{padding:60px 0}
+  .head{margin-bottom:36px}
+  .row{grid-template-columns:48px 1fr;gap:14px 16px;padding:28px 4px}
+  .row-icon{width:48px;height:48px}
+  .row h3{font-size:1.35rem}
+  .feature + .feature{margin-top:64px}
+  .quote{font-size:1.25rem}
+  footer{padding:80px 0 96px}
+  .contact{margin-top:48px}
+  .copy{margin-top:36px}
+  .wa{white-space:normal;width:100%;justify-content:center;padding:16px 20px}
+  .chat{max-height:calc(100dvh - 104px)}
+}
+
+.tile{flex-direction:column;align-items:flex-start;justify-content:space-between;gap:14px}
+.logo-badge{position:relative;flex-shrink:0;width:var(--badge,104px);height:var(--badge,104px);background:#fff;border-radius:16px;box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.logo-badge img{position:absolute;inset:10px;width:calc(100% - 20px);height:calc(100% - 20px);object-fit:contain}
+@media (min-width:701px) and (max-width:1100px){ .tile{--badge:88px} }
+@media (max-width:520px){ .tile{--badge:88px} }
+
+.copy-mail{display:inline-flex;align-items:center;min-height:44px;padding:8px 18px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:transparent;color:#cbd5e1;font:inherit;font-weight:600;font-size:.92rem;cursor:pointer;transition:color .2s,border-color .2s}
+.copy-mail:hover{color:var(--gold);border-color:var(--gold)}
+.chat-human-2{padding-top:0}
+</style>
+</head>
+<body>
+
+<nav aria-label="Principal">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo"><img src="logo-fer13.jpg" alt="FER13 Global Labs" width="638" height="266"></a>
+    <div class="nav-right">
+      <div class="nav-links" id="navLinks">
+        <a href="#servicios">Servicios</a>
+        <a href="#portafolio">Portafolio</a>
+        <a href="#software">Software</a>
+        <a href="#fundador">Quién soy</a>
+      </div>
+      <a href="#contacto" class="btn btn-sm">Contacto</a>
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <canvas id="net" aria-hidden="true"></canvas>
+  <div class="container hero-main">
+    <div class="hero-text">
+      <h1>
+        <span class="line">Construimos el</span>
+        <span class="line gold">ecosistema digital</span>
+        <span class="line">de tu negocio.</span>
+      </h1>
+      <p>Creamos webs que dan visibilidad y hacen crecer tu marca, sistemas de gestión a medida y automatizaciones que trabajan por ti. Tecnología pensada para que tu negocio o tu marca personal destaque y escale.</p>
+      <div class="hero-actions">
+        <a href="#portafolio" class="btn">Ver proyectos</a>
+        <a href="#contacto" class="btn btn-ghost">Contacto</a>
+      </div>
+    </div>
+    <div class="code" aria-hidden="true">
+      <div class="code-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div></div>
+      <div class="code-body">
+        <span class="cl" style="--n:39;--i:0"><span class="k">const</span> negocio = <span class="k">new</span> <span class="f">EcosistemaDigital</span>({</span>
+        <span class="cl" style="--n:26;--i:1">  web: <span class="s">'Alto Rendimiento'</span>,</span>
+        <span class="cl" style="--n:40;--i:2">  automatizacion: <span class="s">'Procesos Eficientes'</span>,</span>
+        <span class="cl" style="--n:28;--i:3">  crm: <span class="s">'Gestión Centralizada'</span></span>
+        <span class="cl" style="--n:3;--i:4">});</span>
+        <span class="cl gap" style="--n:41;--i:5">negocio.<span class="f">escalarVentas</span>(); <span class="c">// Ejecutando...</span><span class="cursor"></span></span>
+      </div>
+    </div>
+  </div>
+  <div class="marquee" aria-hidden="true">
+    <div class="track">
+      <div class="group"><span>Webs que hacen crecer tu marca</span><span>Automatización de procesos</span><span>CRM y ERP propios</span><span>Integraciones entre herramientas</span><span>SEO y rendimiento</span><span>Software sin suscripciones</span></div>
+      <div class="group"><span>Webs que hacen crecer tu marca</span><span>Automatización de procesos</span><span>CRM y ERP propios</span><span>Integraciones entre herramientas</span><span>SEO y rendimiento</span><span>Software sin suscripciones</span></div>
+    </div>
+  </div>
+</header>
+
+<section id="servicios" class="sec">
+  <div class="container">
+    <div class="head">
+      <h2>Soluciones de ingeniería</h2>
+      <p>Herramientas diseñadas desde cero para resolver problemas reales de tu empresa.</p>
+    </div>
+    <div class="rows">
+      <div class="row">
+        <div class="row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+        <h3>Desarrollo web a medida</h3>
+        <p>Webs y tiendas online programadas desde cero para que te encuentren, te recuerden y te elijan. Damos visibilidad a tu negocio y hacemos crecer tu marca personal con código limpio, SEO y una carga ultrarrápida que convierte visitas en clientes.</p>
+      </div>
+      <div class="row">
+        <div class="row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+        <h3>Automatización y sistemas</h3>
+        <p>Optimización de procesos mediante integraciones y flujos de trabajo automatizados. Conectamos tus herramientas para ahorrar tiempo y reducir errores.</p>
+      </div>
+      <div class="row">
+        <div class="row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg></div>
+        <h3>Software de gestión (CRM/ERP)</h3>
+        <p>Arquitectura de sistemas a medida para centralizar clientes, inventarios y ventas. Software propietario, sin pagar suscripciones mensuales a terceros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portafolio" class="sec dark">
+  <div class="container">
+    <div class="head">
+      <h2>Casos de éxito</h2>
+      <p>Proyectos reales, propios y de clientes, en diferentes industrias.</p>
+    </div>
+    <div class="projects">
+      <article class="proj">
+        <div class="tile t1"><span class="logo-badge"><img src="logo-oliver.webp" alt="" width="115" height="79" loading="lazy"></span><b>Oliver Veterinaria</b></div>
+        <div class="info">
+          <p>Ecosistema web para clínica veterinaria binacional (Argentina/Paraguay). Catálogo digital, sistema de turnos y panel de administración.</p>
+          <div class="tags"><span class="tag">Web App</span><span class="tag">E-commerce</span><span class="tag">Gestión</span></div>
+          <a class="link" href="https://oliver-veterinaria-beta.netlify.app" target="_blank" rel="noopener">Ver demo <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="proj">
+        <div class="tile t2"><span class="logo-badge"><img src="logo-acp.webp" alt="" width="345" height="360" loading="lazy"></span><b>Arroz con Pollo Trading</b></div>
+        <div class="info">
+          <p>Desarrollo web para la comunidad y los directos de trading. Interfaz centrada en la lectura y estructura optimizada para la conversión.</p>
+          <div class="tags"><span class="tag">Comunidad</span><span class="tag">SEO</span></div>
+          <a class="link" href="https://arrozconpollotrading.com" target="_blank" rel="noopener">Visitar sitio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+      <article class="proj">
+        <div class="tile t3"><span class="logo-badge"><img src="logo-eti.webp" alt="" width="294" height="360" loading="lazy"></span><b>El Trader Imperfecto</b></div>
+        <div class="info">
+          <p>Plataforma web para la producción de herramientas y software de trading. Diseño de interfaz de usuario, arquitectura de contenidos y despliegue optimizado.</p>
+          <div class="tags"><span class="tag">Software</span><span class="tag">Diseño UI</span></div>
+          <a class="link" href="https://eltraderimperfecto.com" target="_blank" rel="noopener">Visitar sitio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M8 7h9v9"/></svg></a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="software" class="sec soft">
+  <div class="container">
+    <div class="head">
+      <h2>Software propio, ya en producción</h2>
+      <p>Programas que hemos construido desde cero y que ya funcionan en negocios reales.</p>
+    </div>
+
+    <article class="feature">
+      <div class="feature-head">
+        <div>
+          <h3>CRM de ventas a medida</h3>
+          <p>Tus clientes, tus ventas y tu seguimiento en un solo panel, hecho a la medida de tu negocio y sin pagar suscripciones mensuales a terceros.</p>
+        </div>
+        <ul class="ticks">
+          <li>Embudo de ventas por etapas</li>
+          <li>Ventas por mes y ticket medio de un vistazo</li>
+          <li>Alta rápida de clientes y de ventas</li>
+          <li>Copias de seguridad y gestión de tus datos</li>
+        </ul>
+      </div>
+      <div class="win">
+        <div class="win-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><b>CRM Ventas · FER13 Global Labs</b></div>
+        <div class="shot shot-crm"><img src="CRM.jpg" alt="Panel del CRM de ventas" width="2556" height="1380" loading="lazy" style="background:#e2e8f0;"></div>
+        <div class="shot-hint hint-crm" aria-hidden="true">Desliza para ver el panel completo</div>
+      </div>
+    </article>
+
+    <article class="feature feature-split">
+      <div class="win">
+        <div class="win-bar"><div class="dot r"></div><div class="dot y"></div><div class="dot g"></div><b>ETI TOTAL · El Trader Imperfecto</b></div>
+        <div class="shot shot-eti"><img src="eti-total.jpg" alt="Panel de ETI TOTAL" width="1154" height="1076" loading="lazy" style="background:#e2e8f0;"></div>
+        <div class="shot-hint hint-eti" aria-hidden="true">Desliza para ver el panel completo</div>
+      </div>
+      <div>
+        <h3>Herramientas algorítmicas para NinjaTrader 8</h3>
+        <p>ETI TOTAL reúne en un solo panel las herramientas que hemos desarrollado para operar con más orden y control.</p>
+        <ul class="ticks">
+          <li><span>Gestor de Cuentas<small>Vigila reglas y riesgo de tus cuentas en segundo plano.</small></span></li>
+          <li><span>ETI Connector<small>Conecta tus cuentas con el diario de trading.</small></span></li>
+          <li><span>Indicadores y bots ETI<small>Instalación sencilla de tus scripts desde un archivo .zip.</small></span></li>
+        </ul>
+        <a class="btn" href="https://eltraderimperfecto.com" target="_blank" rel="noopener">Conocer El Trader Imperfecto</a>
+        <p class="note">El trading conlleva riesgo de pérdida. Ninguna herramienta garantiza resultados.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="fundador" class="sec">
+  <div class="container founder">
+    <div class="photo"><img src="Fundador.png" alt="Fundador de FER13 Global Labs" width="342" height="1024"></div>
+    <div>
+      <h2>Detrás de FER13 Global Labs</h2>
+      <p>Hola, mi nombre es Fernando y soy el fundador de FER13 Global Labs. Mi filosofía es simple: la tecnología no debe ser un dolor de cabeza, sino el mejor empleado de tu negocio.</p>
+      <p>Llevo más de 15 años en el sector comercial y de ventas, así que entiendo lo que necesita de verdad un cliente. Desde hace más de 5 años aprendo y mejoro herramientas de software, y las uso para construir soluciones a medida que resuelven problemas reales, sin plantillas genéricas ni dependencias innecesarias.</p>
+      <div class="quote">“Mientras tú te enfocas en tus clientes, nosotros nos aseguramos de que la tecnología trabaje para ti, 24/7.”</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  <div class="container">
+    <div class="cta">
+      <div>
+        <h2>¿Listo para escalar tu negocio?</h2>
+        <p>Escríbenos directamente y hablemos de tu próximo proyecto.</p>
+      </div>
+      <!-- ✅ WhatsApp +34 654 129 024 → 34654129024 -->
+      <a href="https://wa.me/34654129024?text=Hola%20FER13%20Global%20Labs" target="_blank" rel="noopener" class="wa">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Contactar por WhatsApp
+      </a>
+    </div>
+    <div class="contact">
+      <a href="contacto.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Formulario de contacto
+      </a>
+      <a href="mailto:fer13globallabs@gmail.com?subject=Consulta%20desde%20la%20web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        fer13globallabs@gmail.com
+      </a>
+      <button class="copy-mail" type="button" data-copy="fer13globallabs@gmail.com">Copiar correo</button>
+      <a href="https://www.linkedin.com/in/fernando-valero-34345442b/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Fernando Valero en LinkedIn
+      </a>
+    </div>
+    <div class="copy">
+        &copy; 2026 FER13 Global Labs. Todos los derechos reservados. 
+        <span style="margin: 0 10px; color: #475569;">|</span> 
+        <a href="legal.html" style="color: inherit; text-decoration: underline; text-underline-offset: 4px;">Información Legal</a>
+    </div>
+  </div>
+</footer>
+
+<button class="chat-fab" id="chatFab" type="button" aria-label="Abrir chat con el asistente de FER13" aria-expanded="false" aria-controls="chatPanel">
+  <svg class="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1121 12z"/></svg>
+  <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+</button>
+<div class="chat-hint" id="chatHint" hidden>¿Te ayudo a elegir un servicio?</div>
+<section class="chat" id="chatPanel" role="dialog" aria-label="Asistente virtual de FER13 Global Labs" hidden>
+  <header class="chat-head">
+    <div class="chat-av" aria-hidden="true">F</div>
+    <div><strong>Asistente de FER13</strong><span>Asistente virtual · responde al instante</span></div>
+    <button class="chat-x" id="chatX" type="button" aria-label="Cerrar chat">&times;</button>
+  </header>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <form class="chat-form" id="chatForm">
+    <input id="chatInput" type="text" autocomplete="off" maxlength="200" placeholder="Escribe tu mensaje…" aria-label="Tu mensaje">
+    <button type="submit" aria-label="Enviar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+  </form>
+  <a class="chat-human" id="chatHuman" href="#" target="_blank" rel="noopener">¿Prefieres una persona? <b>Escribe por WhatsApp</b></a>
+  <a class="chat-human chat-human-2" href="contacto.html" target="_blank" rel="noopener">¿Prefieres escribir? <b>Usa el formulario</b></a>
+</section>
+
+<script>
+(function(){
+  var c=document.getElementById('net'); if(!c) return;
+  var hero=c.parentElement, ctx=c.getContext('2d');
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var w=0,h=0,nodes=[],mouse={x:-9999,y:-9999},visible=true,raf=0;
+  var LINK=140, MOUSE_R=190;
+
+  function size(){
+    var r=hero.getBoundingClientRect(), dpr=Math.min(window.devicePixelRatio||1,2);
+    w=r.width; h=r.height; c.width=w*dpr; c.height=h*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    var n=Math.round(Math.min(120,Math.max(34,w*h/13000)));
+    nodes=[];
+    for(var i=0;i<n;i++) nodes.push({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,r:Math.random()*1.4+.8});
+  }
+  function frame(){
+    ctx.clearRect(0,0,w,h);
+    var i,j,a,b,dx,dy,d;
+    for(i=0;i<nodes.length;i++){
+      a=nodes[i];
+      if(!reduce){
+        a.x+=a.vx; a.y+=a.vy;
+        if(a.x<0||a.x>w) a.vx*=-1;
+        if(a.y<0||a.y>h) a.vy*=-1;
+        dx=mouse.x-a.x; dy=mouse.y-a.y; d=Math.sqrt(dx*dx+dy*dy);
+        if(d<MOUSE_R&&d>1){ a.x+=dx/d*.35; a.y+=dy/d*.35; }
+      }
+    }
+    for(i=0;i<nodes.length;i++){
+      a=nodes[i];
+      for(j=i+1;j<nodes.length;j++){
+        b=nodes[j]; dx=a.x-b.x; dy=a.y-b.y; d=Math.sqrt(dx*dx+dy*dy);
+        if(d<LINK){ ctx.strokeStyle='rgba(198,157,83,'+((1-d/LINK)*.32)+')'; ctx.lineWidth=1; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke(); }
+      }
+      dx=a.x-mouse.x; dy=a.y-mouse.y; d=Math.sqrt(dx*dx+dy*dy);
+      if(d<MOUSE_R){ ctx.strokeStyle='rgba(230,200,140,'+((1-d/MOUSE_R)*.7)+')'; ctx.lineWidth=1.2; ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(mouse.x,mouse.y); ctx.stroke(); }
+      ctx.fillStyle='rgba(222,188,120,.9)'; ctx.beginPath(); ctx.arc(a.x,a.y,a.r,0,6.2832); ctx.fill();
+    }
+    if(!reduce&&visible) raf=requestAnimationFrame(frame);
+  }
+  function start(){ cancelAnimationFrame(raf); raf=requestAnimationFrame(frame); }
+
+  size(); start();
+  var t; window.addEventListener('resize',function(){ clearTimeout(t); t=setTimeout(function(){ size(); start(); },150); });
+  hero.addEventListener('mousemove',function(e){ var r=hero.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+  hero.addEventListener('mouseleave',function(){ mouse.x=mouse.y=-9999; });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ visible=en[0].isIntersecting; if(visible) start(); }).observe(hero);
+  }
+})();
+
+(function(){
+  var f=document.getElementById('contacto'); if(!f) return;
+  f.addEventListener('mousemove',function(e){
+    var r=f.getBoundingClientRect();
+    f.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    f.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+})();
+
+(function(){
+  var fab=document.getElementById('chatFab'), panel=document.getElementById('chatPanel'),
+      log=document.getElementById('chatLog'), chips=document.getElementById('chatChips'),
+      form=document.getElementById('chatForm'), input=document.getElementById('chatInput'),
+      closeBtn=document.getElementById('chatX'), hint=document.getElementById('chatHint'),
+      human=document.getElementById('chatHuman');
+  if(!fab||!panel) return;
+
+  var wa=document.querySelector('a.wa');
+  var waBase=wa?wa.href.split('?')[0]:'https://wa.me/34654129024';
+  var S={name:'',service:'',status:'',state:'',busy:false,started:false};
+
+  var SERVICES={
+    web:{label:'Una web a medida',short:'Web o tienda online',
+         text:'Perfecto. Creamos webs y tiendas online desde cero que dan visibilidad y hacen crecer tu marca: código limpio, SEO y carga rápida, sin plantillas genéricas.'},
+    auto:{label:'Automatizar procesos',short:'Automatización de procesos',
+         text:'Genial. Conectamos tus herramientas y automatizamos las tareas repetitivas para que ahorres tiempo y evites errores.'},
+    crm:{label:'Un CRM o ERP',short:'CRM o ERP a medida',
+         text:'Buena elección. Creamos CRM y ERP a medida para centralizar clientes, inventario y ventas, sin pagar suscripciones mensuales a terceros.'},
+    idk:{label:'Aún no lo sé',short:'Quiere orientación'}
+  };
+
+  function norm(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+  function cap(t){return t.charAt(0).toUpperCase()+t.slice(1);}
+  function detect(t){
+    var n=norm(t);
+    if(/persona|humano|hablar con|llamar|whatsapp|con fernando|alguien/.test(n)) return 'human';
+    if(/precio|cuanto|cuesta|costo|presupuesto|tarifa|cobr/.test(n)) return 'price';
+    if(/crm|erp|gesti|cliente|inventario|venta|stock|factur|sistema/.test(n)) return 'crm';
+    if(/automat|proceso|integra|flujo|conect|ahorrar|repetitiv/.test(n)) return 'auto';
+    if(/web|pagina|sitio|tienda|ecommerce|e-commerce|seo|landing|online|internet/.test(n)) return 'web';
+    return '';
+  }
+  function waLink(){
+    var t='Hola FER13 Global Labs';
+    if(S.name) t+=', soy '+S.name;
+    t+='.';
+    if(S.service) t+=' Me interesa: '+SERVICES[S.service].short+'.';
+    if(S.status) t+=' '+S.status+'.';
+    return waBase+'?text='+encodeURIComponent(t);
+  }
+
+  function add(who,text){
+    var d=document.createElement('div'); d.className='msg '+who; d.textContent=text;
+    log.appendChild(d); log.scrollTop=log.scrollHeight;
+  }
+  var typingEl=null;
+  function showTyping(){
+    typingEl=document.createElement('div'); typingEl.className='msg bot typing';
+    typingEl.innerHTML='<i></i><i></i><i></i>'; log.appendChild(typingEl); log.scrollTop=log.scrollHeight;
+  }
+  function hideTyping(){ if(typingEl){typingEl.remove(); typingEl=null;} }
+  function clearChips(){ chips.innerHTML=''; }
+  function setChips(list){
+    clearChips();
+    list.forEach(function(c){
+      var el;
+      if(c.href){ el=document.createElement('a'); el.href=c.href; el.target='_blank'; el.rel='noopener'; }
+      else { el=document.createElement('button'); el.type='button';
+        el.addEventListener('click',function(){ if(S.busy) return; add('me',c.label); c.go(); }); }
+      el.className='chip'+(c.main?' chip-main':''); el.textContent=c.label; chips.appendChild(el);
+    });
+    log.scrollTop=log.scrollHeight;
+  }
+  function say(lines,done){
+    S.busy=true; clearChips(); var i=0;
+    (function next(){
+      if(i>=lines.length){ S.busy=false; if(done) done(); return; }
+      var t=lines[i++]; showTyping();
+      setTimeout(function(){ hideTyping(); add('bot',t); next(); }, Math.min(1700,500+t.length*16));
+    })();
+  }
+
+  function serviceChips(){
+    var out=[]; ['web','auto','crm','idk'].forEach(function(k){
+      out.push({label:SERVICES[k].label,go:function(){route(k);}});
+    });
+    return out;
+  }
+  function askNeed(){
+    S.state='need';
+    say([S.name?('Encantado, '+S.name+'.'):'Perfecto.','¿En qué puedo ayudarte hoy?'],function(){ setChips(serviceChips()); });
+  }
+  function route(k){
+    S.service=(k==='idk')?'':k;
+    if(k==='idk'){
+      S.state='idk';
+      say(['No pasa nada, muchas veces se empieza así.','Cuéntame qué es lo que más tiempo te quita en tu negocio y te oriento.']);
+      return;
+    }
+    S.state='status';
+    say([SERVICES[k].text,'¿Ya tienes algo hecho o partimos de cero?'],function(){
+      setChips([
+        {label:'Partimos de cero',go:function(){S.status='Empezaría de cero';handoff();}},
+        {label:'Quiero mejorar algo que ya tengo',go:function(){S.status='Ya tiene algo y quiere mejorarlo';handoff();}}
+      ]);
+    });
+  }
+  function price(){
+    say(['El precio depende de lo que necesites, así que cada propuesta se hace a medida.','Si me cuentas qué buscas, se lo paso a Fernando para que te prepare un presupuesto.'],function(){ setChips(serviceChips()); });
+  }
+  function handoff(){
+    S.state='done';
+    say([(S.name?'Gracias, '+S.name+'. ':'Gracias. ')+'Lo mejor ahora es hablarlo directamente con Fernando.',
+         'Puedo pasarle este resumen por WhatsApp para que no tengas que repetirlo.'],function(){
+      setChips([
+        {label:'Abrir WhatsApp con el resumen',href:waLink(),main:true},
+        {label:'Prefiero escribir un mensaje',href:'contacto.html'},
+        {label:'Ver otros servicios',go:function(){ say(['Claro, ¿qué otro servicio te interesa?'],function(){ setChips(serviceChips()); }); }}
+      ]);
+    });
+  }
+  function fallback(){
+    say(['No estoy seguro de haberte entendido bien.','¿Cuál de estas opciones se acerca más a lo que buscas?'],function(){
+      var c=serviceChips(); c.push({label:'Hablar con una persona',go:handoff}); setChips(c);
+    });
+  }
+  function free(text){
+    var d=detect(text);
+    if(d==='human') return handoff();
+    if(d==='price') return price();
+    if(d) return route(d);
+    fallback();
+  }
+
+  function onText(text){
+    if(S.busy) return;
+    add('me',text);
+    if(S.state==='name'){
+      var d=detect(text);
+      var cleaned=text.replace(/^(hola[, ]*)?(me llamo|mi nombre es|yo soy|soy)\s+/i,'').trim();
+      var parts=cleaned.split(/\s+/);
+      if(d||parts.length>3){ S.name=''; return free(text); }
+      S.name=cap(parts[0].replace(/[^\p{L}'-]/gu,'').slice(0,20));
+      return askNeed();
+    }
+    if(S.state==='idk'){
+      var k=detect(text); if(k&&SERVICES[k]) S.service=k;
+      S.status='Comenta: '+text.slice(0,100); return handoff();
+    }
+    if(S.state==='status'){ S.status='Comenta: '+text.slice(0,100); return handoff(); }
+    free(text);
+  }
+
+  function start(){
+    S.started=true; S.state='name';
+    say(['¡Hola! Soy el asistente virtual de FER13 Global Labs.','Antes de nada, ¿cómo te llamo?']);
+  }
+  function open(){
+    panel.hidden=false; fab.setAttribute('aria-expanded','true'); hint.hidden=true;
+    human.href=waBase+'?text='+encodeURIComponent('Hola FER13 Global Labs');
+    if(!S.started) start();
+    setTimeout(function(){ input.focus(); },50);
+  }
+  function close(){ panel.hidden=true; fab.setAttribute('aria-expanded','false'); }
+
+  fab.addEventListener('click',function(){ panel.hidden?open():close(); });
+  closeBtn.addEventListener('click',function(){ close(); fab.focus(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!panel.hidden){ close(); fab.focus(); } });
+  form.addEventListener('submit',function(e){
+    e.preventDefault(); var t=input.value.trim(); if(!t||S.busy) return; input.value=''; onText(t);
+  });
+  function showHint(){ if(panel.hidden&&!S.started&&hint.hidden){ hint.hidden=false; setTimeout(function(){ hint.hidden=true; },8000); } }
+  var small=window.matchMedia('(max-width:980px)');
+  setTimeout(function(){
+    if(!small.matches||window.scrollY>400){ showHint(); return; }
+    var onScroll=function(){ if(window.scrollY>400){ window.removeEventListener('scroll',onScroll); showHint(); } };
+    window.addEventListener('scroll',onScroll,{passive:true});
+  },5000);
+})();
+
+(function(){
+  var nav=document.querySelector('nav'), btn=document.getElementById('navToggle'), menu=document.getElementById('navLinks');
+  if(!nav||!btn||!menu) return;
+  function set(open){
+    nav.classList.toggle('open',open);
+    btn.setAttribute('aria-expanded',open?'true':'false');
+    btn.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');
+  }
+  btn.addEventListener('click',function(){ set(!nav.classList.contains('open')); });
+  menu.addEventListener('click',function(e){ if(e.target.closest('a')) set(false); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') set(false); });
+  document.addEventListener('click',function(e){ if(!nav.contains(e.target)) set(false); });
+  window.addEventListener('resize',function(){ if(window.innerWidth>700) set(false); });
+})();
+
+(function(){
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    var original=b.textContent;
+    b.addEventListener('click',function(){
+      var text=b.getAttribute('data-copy');
+      function ok(){ b.textContent='Copiado'; setTimeout(function(){ b.textContent=original; },2000); }
+      function legacy(){
+        var t=document.createElement('textarea'); t.value=text; t.setAttribute('readonly',''); t.style.position='fixed'; t.style.opacity='0';
+        document.body.appendChild(t); t.select();
+        try{ document.execCommand('copy'); ok(); }catch(e){ b.textContent=text; }
+        t.remove();
+      }
+      if(navigator.clipboard&&window.isSecureContext) navigator.clipboard.writeText(text).then(ok,legacy); else legacy();
+    });
+  });
+})();
+</script>
+</body>
+</html>
